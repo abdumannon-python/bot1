@@ -1,16 +1,16 @@
-# This is a sample Python script.
+import os
+from dotenv import load_dotenv
+from telegram import Update
+from telegram.ext import Application, CommandHandler, ContextTypes
+load_dotenv()
+TOKEN=os.getenv("BOT_TOKEN")
+async def start(uptade:Update,context: ContextTypes.DEFAULT_TYPE):
+    await uptade.message.reply_text('salom shop botga xush kelibsiz')
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+def main():
+    app=Application.builder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start",start))
+    print("bot ishga tushdi")
+    app.run_polling()
+if __name__=='__main__':
+    main()
